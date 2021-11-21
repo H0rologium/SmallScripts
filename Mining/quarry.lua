@@ -80,37 +80,29 @@ end
 
 --Sends us back to a chest. Will dump all items every time it vists, so make sure the storage can handle all of the blocks.--
 local function returnToOrigin()
-		dest = {1,0,1}
-		while coordinates[1] > dest[1] do
-			impulse("backward", dest[1] - coordinates[1])
-		end
- 		while coordinates[2] > dest[2] do
-			impulse("up", dest[2] - coordinates[2])
-		end
-		while coordinates[3] > dest[3] do
-			impulse("left", dest[3] - coordinates[3])
-		end	
+		print('Returning to origin from ' .. coordinates[1] .. ',' .. coordinates[2] .. ',' .. coordinates[3] .. '!')
+		impulse("backward", curProgress)
+		os.sleep(0.1)
+		impulse("up",  curDepth - dest[2])
+		os.sleep(0.1)
+		impulse("left", rows)
+		os.sleep(0.1)
+		print('Returned to origin!')
 end
 
---Makes sure we at least have enough fuel for another layer, this is run every time a layer is complete--
-local function checkFuel()
-	if turtle.getFuelLevel() < coordinates[1] + coordinates[2] + coordinates[3] + 20 then
-		print("Fuel too low! returning!")
-		returnToOrigin()
-	end
-end
+
 
 --Mines out one layer--
 local function mineLayer()
-	
 	while curProgress < diameter do
 		impulse("forward", 1)
+		fs.delete(fs.getName("curProgress." .. tostring(curProgress)))
 		curProgress = curProgress + 1
-		fs.delete(fs.getName("curProgress." .. tostring(curProgress) - 1))
 		local q = fs.open("curProgress." .. tostring(curProgress), "w")
 		q.close()
 	end
 	if curProgress == diameter and rows < diameter then --Pray we dont somehow go over--
+		fs.delete(fs.getName("curProgress." .. tostring(curProgress)))
 		if rows % 2 == 0 then
 			--Even row--
 			turtle.turnRight()
@@ -124,28 +116,37 @@ local function mineLayer()
 			turtle.turnLeft()
 			curProgress = 0
 		end
-		fs.delete(fs.getName("curProgress." .. tostring(curProgress) - 1))
 		local q = fs.open("curProgress." .. tostring(curProgress), "w")
 		q.close()
+		rows = rows + 1
 	elseif curProgress >= diameter and curDepth < depth then --We've mined out an entire row--
 		if rows % 2 == 0 then
-			turtle.turnRight()
-			impulse("forward", diameter-1)
-			turtle.turnRight()
-			impulse("forward", diameter-1)
-			turtle.turnRight()
+			turtle.turnLeft()
+			impulse("forward", diameter)
+			turtle.turnLeft()
+			impulse("forward", diameter)
+			turtle.turnLeft()
+			os.sleep(0.1)
+			turtle.turnLeft()
 		else 
-			turtle.turnLeft()
-			impulse("forward", diameter-1)
-			turtle.turnLeft()
-			impulse("forward", diameter-1)
-			turtle.turnLeft()
+			turtle.turnRight()
+			impulse("forward", diameter)
+			turtle.turnRight()
+			impulse("forward", diameter)
+			turtle.turnRight()
+			os.sleep(0.1)
+			turtle.turnRight()
 		end
 		impulse("down", 1)
 		rows = 0
+		fs.delete(fs.getName("curProgress." .. tostring(curProgress)))
 		curProgress = 0
+		local qe = fs.open("curProgress." .. tostring(curProgress), "w")
+		qe.close()
+		curDepth = coordinates[2]
+	else 
+		return
 	end
-	rows = rows + 1
 end
 --Refuel function, run at startup. Different from checkfuel as this function will only continue when the robot has fuel to travel the ENTIRE quarry--
 local function fuel()
@@ -173,10 +174,12 @@ local function main()
 		rows = coordinates[3]
 	end
 	--The robot mines from a left to right angle--
-	while curDepth <= depth do
+	while curDepth < depth do
 		mineLayer()
-		checkFuel()
 	end
+	--Cleanup since done--
+	mineLayer()
+	returnToOrigin()
 end
 --Sets up the robot, determines if we were in progress--
 local function preInit()
@@ -200,7 +203,7 @@ local function preInit()
 		f.close()
 		f = fs.open([[z.]] .. tostring(coordinates[3]), "w")
 		f.close()
-		f = fs.open([[curProgress]] .. tostring(curProgress), "w")
+		f = fs.open([[curProgress.]] .. tostring(curProgress), "w")
 		f.close()
 	end
 	
