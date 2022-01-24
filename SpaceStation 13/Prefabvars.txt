@@ -1,0 +1,31 @@
+PI = 3.141592653;
+E = 2.718281828;
+SQURT2 = 1.414213562;
+FALSE = 0; // true/false are just Boolean shortcuts to 0 and 1
+TRUE = 1;
+NORTH = 1;
+SOUTH = 2;
+EAST = 4;
+WEST = 8;
+
+channels.common = 1459
+channels.science = 1351
+channels.command = 1353
+channels.medical = 1355
+channels.engineering = 1357
+channels.security = 1359
+channels.supply = 1347
+channels.service = 1349
+
+languages.human = 1
+languages.monkey = 2
+languages.robot = 4
+languages.polysmorph = 8
+languages.draconic = 16
+languages.beachtongue = 32
+ 
+filter_types.robot = "robot"
+filter_types.loud = "yell"
+filter_types.emphasis = "italics"
+filter_types.wacky = "sans"
+filter_types.commanding = "command_headset"

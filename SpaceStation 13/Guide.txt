@@ -1,0 +1,3 @@
+https://wiki.yogstation.net/wiki/NT_Script
+
+process_signal(sig) is the function called on message sent
