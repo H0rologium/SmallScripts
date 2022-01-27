@@ -1,1 +1,9 @@
 Please remember to adjust your suit sensors to send location data. Nanotrasen thanks you for your cooperation.
+
+Rapid communication over the radio can lead to being put in monkey mode. Please be considerate of your crewmate's ears.
+
+Server outage is over. Thank you for your patience.
+
+%PERSON is late to work, please get back to %RANK
+
+%PERSON is arriving to work %RANK. Please remember to turn on your suit sensors.

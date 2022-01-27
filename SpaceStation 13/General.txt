@@ -1,0 +1,29 @@
+
+
+def process_signal(sig) {
+	
+}
+
+Remember to add an if or elseif to the start of conditionals
+
+
+
+#Engineering disable poly
+(sig.source == "Poly")
+	{
+		sig.pass = 0
+	}
+	return sig
+
+#Add to common channel messages
+(sig.freq == 1459)
+	{
+		sig.content += "extra text";
+	}
+
+#Monkey chance (1/20)
+chance = pick(1,2,3,4,5,6,7,8,8,10,11,12,13,14,15,16,17,18,19,20);
+if(chance == 20)
+	{
+		sig.language = MONKEY;
+	}
