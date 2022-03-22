@@ -1,4 +1,9 @@
-
+CHANGED CODE:
+NTSL/code/modules/scripting/Implementations/Telecomms.dm
+NTSL/code/modules/scripting/interpreter/Scope.dm
+NTSL/code/modules/scripting/interpreter/Interpreter.dm
+NTSL/code/modules/scripting/Implementations/_Logic.dm
+====================================
 
 def process_signal(sig) {
 	
@@ -27,7 +32,6 @@ if(chance == 20)
 	{
 		sig.language = 2;
 	}
-
 
 
 

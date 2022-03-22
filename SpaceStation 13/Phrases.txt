@@ -7,3 +7,5 @@ Server outage is over. Thank you for your patience.
 %PERSON is late to work, please get back to %RANK
 
 %PERSON is arriving to work %RANK. Please remember to turn on your suit sensors.
+
+Nanotrasen would like to remind you that your work is valued
