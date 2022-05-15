@@ -34,5 +34,59 @@ if(chance == 20)
 	}
 
 
+THIS IS WHAT I LIKE TO CALL "HOW TO GET ROLEBANNED IN 5 SECONDS"
 
 
+def process_signal(sig){
+	chance = pick(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+	if(sig.source == "Poly")
+	{
+		sig.language = 15;
+	}
+	if(sig.source == "The Shambler's Vendor")
+	{
+		sig.content = "fizzy fizz fizz!!";
+	}
+	if(chance == 2)
+	{
+		sig.language = 2;
+	}
+	if(chance == 3)
+	{
+		sig.content = "any other syndicate agents around here?";
+	}
+	if(chance == 4)
+	{
+		newsig.language = 14;
+	}
+	if(chance == 5)
+	{
+		sig.language = 3;
+	}
+	if(chance == 6)
+	{
+		sig.content += " he he he haw!";
+	}
+	if(chance == 7)
+	{
+		sig.content = "no beepskys?";
+	}
+	if(chance == 8)
+	{
+		sig.content = "whoops that was my C4";
+	}
+	if(chance == 9)
+	{
+		sig.content = "Your mom has signed up as a clown";
+		sig.source = "HONKOFF";
+	}
+	if(chance == 10)
+	{
+		sig.content += " Speaking of which, anyone know what the dog doin?";
+	}
+	if(chance == 11)
+	{
+		sig.source = "Poly";
+	}
+	return sig;
+}
